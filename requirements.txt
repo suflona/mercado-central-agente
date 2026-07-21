@@ -1,0 +1,6 @@
+cohere
+numpy
+pdfplumber
+pandas
+streamlit
+reportlab
