@@ -1,16 +1,128 @@
 producto,categoria,precio_cop,stock,pasillo
 Arroz Diana 500g,Granos,2800,340,3
-Aceite Girasol Premier 1L,Aceites,9500,210,3
-Leche Alqueria Entera 1L,Lacteos,4200,180,1
-Huevos AA x30,Lacteos,15900,95,1
-Pollo Entero Fresco kg,Carnes,12500,60,2
-Papa Pastusa kg,Frutas y Verduras,2200,400,4
-Banano kg,Frutas y Verduras,2600,350,4
-Detergente Fab 3kg,Aseo Hogar,22900,130,6
-Jabon Rey Barra x3,Aseo Hogar,8900,200,6
-Gaseosa Postobon 1.5L,Bebidas,5200,260,5
-Cerveza Aguila Lata x6,Bebidas,18500,150,5
+Arroz Diana 1kg,Granos,5300,220,3
+Arroz Roa 500g,Granos,2600,280,3
+Frijol Cargamanto 500g,Granos,6200,150,3
+Lenteja Zenu 500g,Granos,4800,160,3
+Garbanzo La Gitana 500g,Granos,5900,90,3
+Avena Quaker 500g,Granos,7200,140,3
 Cafe Sello Rojo 500g,Granos,11200,175,3
+Cafe Aguila Roja 250g,Granos,6800,190,3
+Chocolate Corona x24,Granos,9500,120,3
 Pasta La Muñeca 500g,Granos,3100,300,3
-Papel Higienico Familia x12,Aseo Hogar,19900,110,6
+Pasta Doria Espagueti 500g,Granos,2900,260,3
+Harina Trigo Haz de Oros 1kg,Granos,4300,150,3
+Panela Cuadrada x6,Granos,6100,130,3
+Azucar Manuelita 1kg,Granos,4200,240,3
+Sal Refisal 500g,Granos,1800,300,3
+Aceite Girasol Premier 1L,Aceites,9500,210,3
+Aceite Oleocali 1L,Aceites,8900,190,3
+Aceite de Oliva Carbonell 500ml,Aceites,24500,60,3
+Margarina Rama 250g,Aceites,5200,140,3
+Leche Alqueria Entera 1L,Lacteos,4200,180,1
+Leche Alqueria Deslactosada 1L,Lacteos,4500,140,1
+Leche Colanta Entera 1L,Lacteos,4100,160,1
+Leche en Polvo Klim 400g,Lacteos,15800,80,1
+Yogurt Alpina Griego 150g,Lacteos,3200,190,1
+Yogurt Alqueria Fresa 1L,Lacteos,7200,110,1
 Queso Campesino 500g,Lacteos,13500,85,1
+Queso Mozzarella Colanta 250g,Lacteos,9800,95,1
+Queso Doble Crema Alqueria 250g,Lacteos,8600,100,1
+Mantequilla Alpina 250g,Lacteos,7900,120,1
+Huevos AA x30,Lacteos,15900,95,1
+Huevos AA x12,Lacteos,7200,180,1
+Kumis Alqueria 1L,Lacteos,5600,90,1
+Arequipe Alpina 250g,Lacteos,6300,70,1
+Pollo Entero Fresco kg,Carnes,12500,60,2
+Pechuga de Pollo kg,Carnes,15800,80,2
+Carne de Res Molida kg,Carnes,17900,55,2
+Lomo de Res kg,Carnes,28500,40,2
+Chuleta de Cerdo kg,Carnes,16200,50,2
+Costilla de Cerdo kg,Carnes,14800,45,2
+Chorizo Zenu x6,Carnes,8900,150,2
+Salchicha Ranchera Zenu x10,Carnes,6800,170,2
+Jamon de Cerdo Zenu 250g,Carnes,7500,130,2
+Tocineta Zenu 250g,Carnes,9200,110,2
+Pescado Tilapia Fresca kg,Carnes,19500,35,2
+Camarones Congelados 500g,Congelados,26900,40,8
+Papa Pastusa kg,Frutas y Verduras,2200,400,4
+Papa Criolla kg,Frutas y Verduras,3400,220,4
+Yuca kg,Frutas y Verduras,2100,180,4
+Platano Verde kg,Frutas y Verduras,1900,260,4
+Banano kg,Frutas y Verduras,2600,350,4
+Manzana Roja kg,Frutas y Verduras,5800,190,4
+Naranja Valencia kg,Frutas y Verduras,3200,240,4
+Mango Tommy kg,Frutas y Verduras,4100,150,4
+Aguacate Hass unidad,Frutas y Verduras,3200,200,4
+Tomate Chonto kg,Frutas y Verduras,3600,210,4
+Cebolla Cabezona kg,Frutas y Verduras,2900,230,4
+Cebolla Larga Atado,Frutas y Verduras,2100,190,4
+Zanahoria kg,Frutas y Verduras,2400,220,4
+Lechuga Batavia unidad,Frutas y Verduras,2300,150,4
+Limon Tahiti kg,Frutas y Verduras,2800,240,4
+Fresa Canasta 250g,Frutas y Verduras,4900,90,4
+Detergente Fab 3kg,Aseo Hogar,22900,130,6
+Detergente Ariel 1kg,Aseo Hogar,11800,160,6
+Jabon Rey Barra x3,Aseo Hogar,8900,200,6
+Suavizante Fabuloso 900ml,Aseo Hogar,9600,140,6
+Limpiador Multiusos Fabuloso 1L,Aseo Hogar,7800,150,6
+Cloro Blancox 1L,Aseo Hogar,4900,180,6
+Papel Higienico Familia x12,Aseo Hogar,19900,110,6
+Servilletas Familia x200,Aseo Hogar,5400,170,6
+Toallas Cocina Familia x3,Aseo Hogar,8900,130,6
+Esponjilla Brillo x3,Aseo Hogar,3600,190,6
+Lavaloza Axion 750ml,Aseo Hogar,5900,160,6
+Bolsas de Basura Suprema x20,Aseo Hogar,6700,140,6
+Gaseosa Postobon 1.5L,Bebidas,5200,260,5
+Gaseosa Coca-Cola 1.5L,Bebidas,5800,240,5
+Gaseosa Colombiana 1.5L,Bebidas,5300,210,5
+Agua Cristal 600ml,Bebidas,2200,300,5
+Jugo Hit Naranja 1L,Bebidas,4900,190,5
+Jugo Del Valle Mango 1L,Bebidas,5200,170,5
+Cerveza Aguila Lata x6,Bebidas,18500,150,5
+Cerveza Poker Lata x6,Bebidas,18200,140,5
+Malta Hipinto 500ml,Bebidas,3200,120,5
+Te Hatsu Limon 500ml,Bebidas,3800,110,5
+Pan Tajado Bimbo 500g,Panaderia,6200,140,7
+Pan Aliñado Bimbo x6,Panaderia,4800,150,7
+Croissant Artesanal unidad,Panaderia,2900,90,7
+Pan Frances x4,Panaderia,3200,120,7
+Ponque Ramo Chocolate,Panaderia,4200,110,7
+Galletas Festival x6,Panaderia,3900,180,7
+Galletas Saltinas Noel x4,Panaderia,3400,200,7
+Tortas de Chocolate Individual,Panaderia,3800,80,7
+Pizza Congelada Jamon y Queso,Congelados,14900,70,8
+Papas a la Francesa Congeladas 1kg,Congelados,10800,90,8
+Nuggets de Pollo Congelados 500g,Congelados,12500,85,8
+Helado Crem Helado 1L,Congelados,13900,100,8
+Verduras Mixtas Congeladas 500g,Congelados,7800,95,8
+Papas Margarita x1,Snacks,3200,220,9
+Doritos Nacho 150g,Snacks,5100,190,9
+Platanitos Margarita 130g,Snacks,3600,170,9
+Maní Moras 150g,Snacks,3900,160,9
+Chocolatina Jet x1,Snacks,1800,320,9
+Chicles Trident x1,Snacks,1400,280,9
+Gomitas Trululu 100g,Snacks,3200,150,9
+Barras de Cereal Nutrigrain x1,Snacks,2600,190,9
+Shampoo Head Shoulders 375ml,Cuidado Personal,17900,110,10
+Jabon Dove Barra x3,Cuidado Personal,10800,140,10
+Crema Dental Colgate 90g,Cuidado Personal,6900,190,10
+Desodorante Rexona Roll On,Cuidado Personal,9800,150,10
+Papel Higiénico Suave x4,Cuidado Personal,8900,170,10
+Toallas Higiénicas Nosotras x10,Cuidado Personal,7200,130,10
+Rasuradora Gillette Prestobarba x3,Cuidado Personal,12500,90,10
+Protector Solar Nivea 200ml,Cuidado Personal,32900,60,10
+Concentrado para Perro Dogourmet 8kg,Mascotas,68900,45,11
+Concentrado para Gato Whiskas 3kg,Mascotas,42900,50,11
+Arena para Gato 4kg,Mascotas,25800,40,11
+Snacks para Perro Pedigree x1,Mascotas,8900,80,11
+Pañales Huggies Etapa 3 x30,Bebés,42900,60,12
+Toallitas Húmedas Huggies x80,Bebés,10800,90,12
+Fórmula Infantil Nan 1 x800g,Bebés,68900,35,12
+Compota Baby Manzana x1,Bebés,3200,120,12
+Atún Van Camps en Agua x1,Enlatados y Conservas,4900,180,13
+Sardinas Van Camps en Tomate x1,Enlatados y Conservas,3900,160,13
+Maíz Tierno Enlatado La Constancia x1,Enlatados y Conservas,3600,140,13
+Salsa de Tomate Fruco 400g,Enlatados y Conservas,5200,190,13
+Mayonesa Fruco 400g,Enlatados y Conservas,7100,170,13
+Mostaza La Constancia 200g,Enlatados y Conservas,3400,150,13
