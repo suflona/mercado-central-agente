@@ -126,7 +126,7 @@ Guía completa en [`deploy/OCI_DEPLOY.md`](deploy/OCI_DEPLOY.md). Este
 proyecto es más liviano de desplegar que uno con LLM local (no necesita
 Ollama), así que una instancia pequeña (1-2 OCPU / 6-8 GB) es suficiente.
 
-**Evidencia del deploy:** *(reemplazar una vez desplegado)*
+**Evidencia del deploy:** *(reemplazaré una vez desplegado)*
 - URL pública: `http://<IP_PUBLICA>:8501`
 
 ## 💬 Ejemplos de preguntas
