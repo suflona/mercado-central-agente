@@ -7,6 +7,7 @@ import os
 import re
 import json
 import glob
+import hashlib
 import pandas as pd
 import pdfplumber
 
@@ -17,6 +18,24 @@ os.makedirs(PROCESSED_DIR, exist_ok=True)
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 120
 CATEGORY = "Retail / Supermercado"
+
+
+def compute_raw_hash() -> str:
+    """
+    Calcula un hash SHA-256 sobre el contenido de todos los archivos en
+    data/raw/ (PDF y CSV), ordenados por nombre. Sirve para detectar si
+    los documentos fuente cambiaron desde la última vez que se generó
+    el índice de embeddings, y así decidir si hay que regenerarlo.
+    """
+    hasher = hashlib.sha256()
+    files = sorted(glob.glob(os.path.join(RAW_DIR, "*")))
+    for path in files:
+        if not os.path.isfile(path):
+            continue
+        hasher.update(os.path.basename(path).encode("utf-8"))
+        with open(path, "rb") as f:
+            hasher.update(f.read())
+    return hasher.hexdigest()
 
 
 def clean_text(text: str) -> str:

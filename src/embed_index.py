@@ -5,12 +5,17 @@ vectorial externa (como Chroma) para mantener el proyecto simple: con
 pocos documentos, guardar los vectores en un archivo y comparar con
 similitud coseno en memoria es más que suficiente.
 
+Antes de embeber, siempre vuelve a correr ingest.py para asegurar que
+data/processed/chunks.jsonl esté sincronizado con lo que haya en
+data/raw/ (por si el CSV o los PDF cambiaron).
+
 Requiere la variable de entorno COHERE_API_KEY (gratis en
 https://dashboard.cohere.com/api-keys).
 """
 import os
 import json
 import cohere
+import ingest
 
 BASE_DIR = os.path.join(os.path.dirname(__file__), "..")
 CHUNKS_PATH = os.path.join(BASE_DIR, "data", "processed", "chunks.jsonl")
@@ -38,6 +43,13 @@ def build_index():
         )
 
     co = cohere.Client(api_key)
+
+    # Siempre re-ingerimos primero, para que chunks.jsonl refleje el
+    # contenido actual de data/raw/ (CSV/PDFs), sin depender de que
+    # alguien haya corrido ingest.py manualmente antes.
+    ingest.process_all()
+    source_hash = ingest.compute_raw_hash()
+
     records = load_chunks()
     print(f"Cargados {len(records)} chunks desde {CHUNKS_PATH}")
 
@@ -57,11 +69,13 @@ def build_index():
     for record, embedding in zip(records, all_embeddings):
         record["embedding"] = embedding
 
+    payload = {"source_hash": source_hash, "records": records}
+
     os.makedirs(os.path.dirname(INDEX_PATH), exist_ok=True)
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
-        json.dump(records, f, ensure_ascii=False)
+        json.dump(payload, f, ensure_ascii=False)
 
-    print(f"Índice guardado en {INDEX_PATH}")
+    print(f"Índice guardado en {INDEX_PATH} (source_hash={source_hash[:12]}...)")
 
 
 if __name__ == "__main__":

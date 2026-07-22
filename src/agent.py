@@ -14,6 +14,8 @@ import time
 import numpy as np
 import cohere
 from datetime import datetime, timezone
+import ingest
+import embed_index
 
 BASE_DIR = os.path.join(os.path.dirname(__file__), "..")
 INDEX_PATH = os.path.join(BASE_DIR, "vectorstore", "index.json")
@@ -112,9 +114,32 @@ class MercadoCentralAgent:
                 "Consigue una gratis en https://dashboard.cohere.com/api-keys"
             )
         self.co = cohere.Client(api_key)
+        self._load_or_build_index()
 
-        with open(INDEX_PATH, encoding="utf-8") as f:
-            self.records = json.load(f)
+    def _load_or_build_index(self):
+        """
+        Carga vectorstore/index.json. Si no existe, o si el hash de los
+        archivos fuente (data/raw/) no coincide con el que se usó para
+        generar el índice, lo regenera automáticamente llamando a
+        ingest + embed_index (esto consume llamadas a la API de Cohere,
+        pero solo ocurre cuando los documentos realmente cambiaron).
+        """
+        current_hash = ingest.compute_raw_hash()
+        needs_rebuild = True
+
+        if os.path.exists(INDEX_PATH):
+            with open(INDEX_PATH, encoding="utf-8") as f:
+                data = json.load(f)
+            stored_hash = data.get("source_hash")
+            if stored_hash == current_hash:
+                self.records = data["records"]
+                needs_rebuild = False
+
+        if needs_rebuild:
+            embed_index.build_index()
+            with open(INDEX_PATH, encoding="utf-8") as f:
+                data = json.load(f)
+            self.records = data["records"]
 
         self.embeddings = np.array([r["embedding"] for r in self.records])
 
