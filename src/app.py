@@ -1,9 +1,10 @@
 """
 Chat web con Streamlit para el agente de Mercado Central 24h,
-con una interfaz estilizada al estilo iOS (Mensajes).
+con una estética estilo iOS aplicada sobre los componentes nativos de
+Streamlit (st.chat_message / st.chat_input), para no entrar en
+conflicto con su layout, scroll ni funcionalidad.
 Ejecutar con: streamlit run src/app.py
 """
-import html
 import streamlit as st
 from agent import MercadoCentralAgent
 
@@ -14,15 +15,16 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# ESTILOS — estética iOS (Mensajes / Ajustes): tipografía de sistema, azul
-# #007AFF, fondo gris de sistema, burbujas asimétricas, input tipo "pill".
+# ESTILOS — estética iOS aplicada SOLO por encima de los componentes nativos
+# de Streamlit (st.chat_message, st.chat_input), usando los atributos
+# data-testid oficiales. No se oculta el menú nativo de Streamlit ni se
+# reemplaza su estructura de layout, para evitar conflictos.
 # ---------------------------------------------------------------------------
 st.markdown(
     """
     <style>
     :root {
         --ios-blue: #007AFF;
-        --ios-blue-dark: #0A63C9;
         --ios-bg: #F2F2F7;
         --ios-card: #FFFFFF;
         --ios-bubble-assistant: #E9E9EB;
@@ -41,18 +43,9 @@ st.markdown(
         background: var(--ios-bg) !important;
     }
 
-    /* Oculta el header/menu por defecto de Streamlit para que se sienta
-       como una app nativa, sin "chrome" de navegador */
-    header[data-testid="stHeader"] {
-        background: transparent !important;
-    }
-    #MainMenu, footer {visibility: hidden;}
-
-    .block-container {
-        padding-top: 1rem !important;
-        padding-bottom: 6rem !important;
-        max-width: 640px;
-    }
+    /* Solo oculta el watermark "Made with Streamlit"; el menú (⋮) con
+       "Clear cache" / "Reboot" queda intacto y accesible */
+    footer {visibility: hidden;}
 
     /* ---------- Encabezado tipo "contacto" de Mensajes ---------- */
     .ios-header {
@@ -66,14 +59,14 @@ st.markdown(
         box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     }
     .ios-avatar {
-        width: 46px;
-        height: 46px;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
-        background: linear-gradient(180deg, var(--ios-blue) 0%, var(--ios-blue-dark) 100%);
+        background: var(--ios-blue);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 20px;
         flex-shrink: 0;
     }
     .ios-header-text h1 {
@@ -107,109 +100,46 @@ st.markdown(
         background: rgba(142,142,147,0.12);
         border-radius: 14px;
         padding: 8px 14px;
-        margin: 10px auto 18px auto;
-        max-width: 90%;
+        margin: 10px 0 18px 0;
         line-height: 1.4;
     }
 
-    /* ---------- Burbujas de chat ---------- */
-    .ios-row {
-        display: flex;
-        margin: 6px 0;
-        width: 100%;
+    /* ---------- Burbujas: se reskinnea st.chat_message, sin tocar
+       su estructura ni su posicionamiento ---------- */
+    [data-testid="stChatMessage"] {
+        background: transparent !important;
+        border: none !important;
+        padding: 4px 0 !important;
     }
-    .ios-row.user { justify-content: flex-end; }
-    .ios-row.assistant { justify-content: flex-start; }
-
-    .ios-bubble {
-        max-width: 78%;
-        padding: 10px 14px;
+    [data-testid="stChatMessageAvatarUser"],
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background: var(--ios-blue) !important;
+    }
+    [data-testid="stChatMessageContent"] {
+        background: var(--ios-bubble-assistant);
+        border-radius: 16px;
+        padding: 10px 14px !important;
         font-size: 15.5px;
-        line-height: 1.42;
-        word-wrap: break-word;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.03);
     }
-    .ios-bubble.user {
+    /* El mensaje del usuario es el segundo bloque en cada intercambio
+       (chat_message se pinta en orden de llamada); usamos su avatar para
+       diferenciar el color con :has() (Chrome/Edge/Safari recientes) */
+    div:has(> [data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
         background: var(--ios-blue);
         color: #FFFFFF;
-        border-radius: 18px 18px 4px 18px;
     }
-    .ios-bubble.assistant {
-        background: var(--ios-bubble-assistant);
-        color: var(--ios-text);
-        border-radius: 18px 18px 18px 4px;
+    div:has(> [data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] p {
+        color: #FFFFFF;
     }
-    .ios-bubble a { color: inherit; text-decoration: underline; }
 
-    /* ---------- Fuentes (expander) con look de lista iOS ---------- */
-    div[data-testid="stExpander"] {
-        border: none !important;
-        box-shadow: none !important;
-        max-width: 78%;
-        margin: 2px 0 10px auto;
-        background: transparent !important;
-    }
-    div[data-testid="stExpander"] details {
-        background: var(--ios-card);
-        border-radius: 14px;
-        border: 1px solid var(--ios-separator);
-        overflow: hidden;
-    }
-    div[data-testid="stExpander"] summary {
-        font-size: 12.5px !important;
-        color: var(--ios-blue) !important;
-        font-weight: 500;
-        padding: 8px 12px !important;
-    }
-    .ios-source-item {
-        font-size: 12.5px;
-        color: var(--ios-text-secondary);
-        padding: 6px 12px;
-        border-top: 1px solid var(--ios-separator);
-    }
-    .ios-source-item b { color: var(--ios-text); font-weight: 500; }
-
-    /* ---------- Input inferior tipo "pill" ---------- */
-    [data-testid="stChatInput"] {
-        background: var(--ios-bg) !important;
-        border-top: none !important;
-    }
-    [data-testid="stChatInput"] > div {
-        background: var(--ios-card) !important;
-        border-radius: 22px !important;
-        border: 1px solid var(--ios-separator) !important;
-        box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
-    }
-    [data-testid="stChatInputSubmitButton"] button {
-        background: var(--ios-blue) !important;
-        border-radius: 50% !important;
+    /* ---------- Input de chat: solo redondeo, sin tocar su estructura ---------- */
+    [data-testid="stChatInput"] textarea {
+        border-radius: 20px !important;
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
-
-
-def render_bubble(role: str, text: str):
-    """Renderiza un mensaje como burbuja estilo iOS (texto ya escapado)."""
-    safe_text = html.escape(text).replace("\n", "<br>")
-    st.markdown(
-        f'<div class="ios-row {role}"><div class="ios-bubble {role}">{safe_text}</div></div>',
-        unsafe_allow_html=True,
-    )
-
-
-def render_sources(sources: list):
-    if not sources:
-        return
-    with st.expander("📄 Fuentes utilizadas"):
-        for s in sources:
-            st.markdown(
-                f'<div class="ios-source-item"><b>{html.escape(s["file"])}</b> '
-                f'— pág/fila {s["location"]} · score {s["score"]}</div>',
-                unsafe_allow_html=True,
-            )
-
 
 # ---------------------------------------------------------------------------
 # ENCABEZADO
@@ -250,12 +180,13 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 # ---------------------------------------------------------------------------
-# HISTORIAL DE CONVERSACIÓN
+# HISTORIAL DE CONVERSACIÓN (usando st.chat_message nativo)
 # ---------------------------------------------------------------------------
 for turn in st.session_state.history:
-    render_bubble("user", turn["question"])
-    render_bubble("assistant", turn["answer"])
-    render_sources(turn["sources"])
+    with st.chat_message("user"):
+        st.write(turn["question"])
+    with st.chat_message("assistant"):
+        st.write(turn["answer"])
 
 # ---------------------------------------------------------------------------
 # ENTRADA DE CHAT
@@ -263,14 +194,14 @@ for turn in st.session_state.history:
 question = st.chat_input("Escribe tu pregunta sobre productos, horarios o políticas...")
 
 if question:
-    render_bubble("user", question)
-    with st.spinner("Respondiendo..."):
-        result = agent.ask(question)
-    render_bubble("assistant", result["answer"])
-    render_sources(result["sources"])
+    with st.chat_message("user"):
+        st.write(question)
+    with st.chat_message("assistant"):
+        with st.spinner("Respondiendo..."):
+            result = agent.ask(question)
+        st.write(result["answer"])
 
     st.session_state.history.append({
         "question": question,
         "answer": result["answer"],
-        "sources": result["sources"],
     })
