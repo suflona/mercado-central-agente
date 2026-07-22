@@ -25,15 +25,12 @@ CHAT_MODEL = "command-a-03-2025"
 TOP_K = 5
 MIN_SCORE = 0.20  # por debajo de este score, se considera "sin contexto relevante"
 
-SYSTEM_PROMPT = """Eres el asistente virtual de Mercado Central 24h, un
+SYSTEM_PROMPT = "Eres el asistente virtual de Mercado Central 24h, un
 supermercado colombiano abierto las 24 horas. Responde ÚNICAMENTE con base
 en el contexto proporcionado, extraído de documentos oficiales de la
 empresa (políticas, reglamento, FAQ e inventario). Si la respuesta no está
 en el contexto, dilo explícitamente y sugiere contactar al área de
-servicio al cliente. No inventes precios, políticas ni datos.
-
-Al final de tu respuesta, cita la fuente con el formato:
-[Fuente: nombre_archivo, página/fila X]"""
+servicio al cliente. No inventes precios, políticas ni datos."
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
@@ -89,7 +86,7 @@ class MercadoCentralAgent:
                 model=CHAT_MODEL,
                 preamble=SYSTEM_PROMPT,
                 message=f"Contexto:\n{context}\n\nPregunta: {question}",
-                temperature=0.1,
+                temperature=0.0,
             )
             answer = response.text
             sources = [
