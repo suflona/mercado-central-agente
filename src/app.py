@@ -45,7 +45,7 @@ if question:
     with st.chat_message("user"):
         st.write(question)
     with st.chat_message("assistant"):
-        with st.spinner("Buscando en los documentos..."):
+        with st.spinner("Respondiendo..."):
             result = agent.ask(question)
         st.write(result["answer"])
         if result["sources"]:
