@@ -57,7 +57,7 @@ concepto sin tanta pieza en movimiento.
 | Extracción CSV | pandas |
 | Interfaz | Streamlit |
 | Contenerización | Docker + Docker Compose |
-| Deploy | Oracle Cloud Infrastructure (OCI Compute) |
+| Deploy | Streamlit Community Cloud |
 
 ## 📂 Estructura del repositorio
 
@@ -120,14 +120,21 @@ streamlit run src/app.py
 
 Abre `http://localhost:8501` en tu navegador.
 
-## ☁️ Deploy en OCI
+## ☁️ Deploy
 
-Guía completa en [`deploy/OCI_DEPLOY.md`](deploy/OCI_DEPLOY.md). Este
-proyecto es más liviano de desplegar que uno con LLM local (no necesita
-Ollama), así que una instancia pequeña (1-2 OCPU / 6-8 GB) es suficiente.
+El deploy se intentó inicialmente en Oracle Cloud Infrastructure (OCI),
+siguiendo la guía en [`deploy/OCI_DEPLOY.md`](deploy/OCI_DEPLOY.md). Sin
+embargo, no fue posible completarlo por falta de disponibilidad de
+capacidad Always Free en la región configurada. Como alternativa, el
+deploy final se realizó en **Streamlit Community Cloud**, una opción
+más liviana y directa para este tipo de aplicación (no requiere gestionar
+una máquina virtual, solo conecta el repositorio de GitHub).
 
-**Evidencia del deploy:** *(reemplazaré una vez desplegado)*
-- URL pública: `http://<IP_PUBLICA>:8501`
+**App desplegada:**
+- URL pública: **[mercado-central-agente.streamlit.app](https://mercado-central-agente.streamlit.app/)**
+
+> La guía de deploy en OCI se conserva en [`deploy/OCI_DEPLOY.md`](deploy/OCI_DEPLOY.md)
+> como referencia, por si se desea intentar ese camino en el futuro.
 
 ## 💬 Ejemplos de preguntas
 
