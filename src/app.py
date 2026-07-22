@@ -9,8 +9,8 @@ st.set_page_config(page_title="Mercado Central 24h · Asistente IA", page_icon="
 
 st.title("🛒 Asistente Virtual — Mercado Central 24h")
 st.caption(
-    "Agente de IA (RAG) que responde preguntas sobre horarios, devoluciones, "
-    "productos y políticas del supermercado. Modelo: Cohere (command-a-03-2025)."
+    "Agente de IA que responde preguntas sobre horarios, devoluciones, "
+    "productos y políticas del supermercado."
 )
 st.info(
     "🤖 Estás hablando con un agente de inteligencia artificial, no con una "
