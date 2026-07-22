@@ -1,8 +1,8 @@
-##__pycache__/
-##*.pyc
+__pycache__/
+*.pyc
 ##vectorstore/*.json
-##logs/*.jsonl
-##.env
-##.venv/
-##venv/
-##.streamlit/secrets.toml
+logs/*.jsonl
+.env
+.venv/
+venv/
+.streamlit/secrets.toml
