@@ -22,8 +22,9 @@ os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
 
 EMBED_MODEL = "embed-multilingual-v3.0"
 CHAT_MODEL = "command-a-03-2025"
-TOP_K = 5
-MIN_SCORE = 0.20  # por debajo de este score, se considera "sin contexto relevante"
+# TOP_K = None -> se calcula dinámicamente como len(self.records): siempre
+# trae TODO el corpus indexado, sin importar cuántos chunks haya.
+MIN_SCORE = 0.0  # sin filtro de score: con temperature=0 y corpus completo, el modelo decide qué es relevante
 
 SYSTEM_PROMPT = """Eres el asistente virtual de Mercado Central 24h, un
 supermercado colombiano abierto las 24 horas. Responde ÚNICAMENTE con base
@@ -52,7 +53,10 @@ class MercadoCentralAgent:
 
         self.embeddings = np.array([r["embedding"] for r in self.records])
 
-    def _retrieve(self, question: str, k: int = TOP_K):
+    def _retrieve(self, question: str, k: int = None):
+        if k is None:
+            k = len(self.records)  # trae siempre todo el corpus indexado
+
         q_embed = self.co.embed(
             texts=[question], model=EMBED_MODEL, input_type="search_query"
         ).embeddings[0]
